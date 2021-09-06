@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import { login } from '../services/userService'
+import { getUserFromToken, login } from '../services/userService'
 
 interface LoginProps{
-  setUser: (user:string)=>null
+  setUser: (user:string)=>void
 }
 
-const Login : React.FC = () => {
+const Login : React.FC<LoginProps> = ({setUser}) => {
   const [username,setUsername] = useState('')
   const [password,setPassword] = useState('')
   const history = useHistory()
@@ -16,6 +16,8 @@ const Login : React.FC = () => {
     e.preventDefault()
     try{
       await login(username,password)
+      const newUser = getUserFromToken()
+      setUser(newUser)
       history.push('/')
     } catch(err){
       console.log(err)

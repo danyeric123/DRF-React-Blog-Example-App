@@ -20,6 +20,9 @@ class UserCreate(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# class UserTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = UserTokenObtainPairSerializer
+
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = ()

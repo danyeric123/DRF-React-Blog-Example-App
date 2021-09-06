@@ -1,14 +1,14 @@
-const BASE_URL = 'http://127.0.0.1:8000/api/'
+const BASE_URL = 'http://127.0.0.1:8000/api/posts'
 
 export interface Post {
   id: number;
   title: string;
-  author: number;
+  author: string;
   excerpt: string;
   content: string;
   status:string;
   published: string;
-  category: number
+  category: string
 }
 
 export const getAllPosts = async () : Promise<Post[]> => {

@@ -2,11 +2,11 @@ import React from 'react'
 
 interface Snippet {
   title: string;
-  author: number;
+  author: string;
   excerpt: string;
   status:string;
   published: string;
-  category: number
+  category: string
 }
 
 const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,category}) => {

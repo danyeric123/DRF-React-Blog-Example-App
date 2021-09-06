@@ -8,11 +8,12 @@ import { getAllPosts, Post } from './services/blogServices';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
+import {getUserFromToken } from './services/userService'
 
 const App : React.FC = () => {
   const [posts,setPosts] = useState<Post[]>()
   const [isLoading,setIsLoading] = useState(true)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState('')
 
   useEffect(()=>{
     async function getPosts(){
@@ -55,7 +56,7 @@ const App : React.FC = () => {
           } 
         </Route>
         <Route exact path="/login">
-          <Login />
+          <Login setUser={setUser} />
         </Route>
         <Route exact path="/signup">
           <SignUp />

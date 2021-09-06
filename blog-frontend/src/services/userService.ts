@@ -20,3 +20,9 @@ export const signUp = (username : string, email : string, password : string)=>{
     password
   }).then(()=>{})
 }
+
+export function getUserFromToken() {
+  const token = localStorage.getItem("access_token")
+  console.log(token)
+  return token ? JSON.parse(atob(token.split(".")[1])).user_username : null
+}
