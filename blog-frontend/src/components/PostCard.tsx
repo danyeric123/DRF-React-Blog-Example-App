@@ -6,7 +6,7 @@ interface Snippet {
   excerpt: string;
   status:string;
   published: string;
-  category: string
+  category: string[]
 }
 
 const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,category}) => {
@@ -18,7 +18,9 @@ const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,ca
       <h1>{title}</h1>
       <h3>{status}</h3>
       <small>{published}</small>
+      <small>Written by {author}</small>
       <p>{excerpt}</p>
+      <small>Categories: {category}</small>
 
     </div>
   )

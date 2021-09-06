@@ -8,7 +8,7 @@ export interface Post {
   content: string;
   status:string;
   published: string;
-  category: string
+  category: string[]
 }
 
 export const getAllPosts = async () : Promise<Post[]> => {

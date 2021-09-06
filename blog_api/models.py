@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE, PROTECT
-from django.db.models.fields.related import ForeignKey
+from django.db.models.fields.related import ForeignKey, ManyToManyField
 from django.db.models.manager import Manager
 from django.db.models import Model
 from django.db.models.fields import CharField, DateTimeField, SlugField, TextField
@@ -24,8 +24,7 @@ class Post(Model):
       ('draft', 'Draft'),
       ('published', 'Published'),
   )
-  category = ForeignKey(
-      Category, on_delete=CASCADE, blank=True)
+  category = ManyToManyField(Category)
   title = CharField(max_length=250)
   excerpt = TextField(null=True)
   content = TextField()
