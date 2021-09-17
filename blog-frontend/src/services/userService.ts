@@ -1,7 +1,7 @@
 import { axiosInstance } from "./authServices"
 
 
-export const login = (username : string, password : string) => {
+export const login = (username : string, password : string, setUser : (user:string)=>void) => {
   axiosInstance.post('token/',{
     username,
     password
@@ -10,6 +10,7 @@ export const login = (username : string, password : string) => {
     localStorage.setItem('refresh_token', res.data.refresh);
     axiosInstance.defaults.headers['Authorization'] =
       'JWT ' + localStorage.getItem('access_token');
+    setUser(getUserFromToken())
   })
 }
 
@@ -23,6 +24,5 @@ export const signUp = (username : string, email : string, password : string)=>{
 
 export function getUserFromToken() {
   const token = localStorage.getItem("access_token")
-  console.log(token)
   return token ? JSON.parse(atob(token.split(".")[1])).user_username : null
 }

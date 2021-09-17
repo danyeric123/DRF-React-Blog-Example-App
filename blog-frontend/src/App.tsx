@@ -8,7 +8,7 @@ import { getAllPosts, Post } from './services/blogServices';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
-import {getUserFromToken } from './services/userService'
+// import {getUserFromToken } from './services/userService'
 
 const App : React.FC = () => {
   const [posts,setPosts] = useState<Post[]>()

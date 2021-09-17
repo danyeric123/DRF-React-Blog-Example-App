@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import { getUserFromToken, login } from '../services/userService'
+import { login } from '../services/userService'
 
 interface LoginProps{
   setUser: (user:string)=>void
@@ -15,9 +15,7 @@ const Login : React.FC<LoginProps> = ({setUser}) => {
   const handleSubmit = async (e : React.FormEvent) =>{
     e.preventDefault()
     try{
-      await login(username,password)
-      const newUser = getUserFromToken()
-      setUser(newUser)
+      await login(username,password,setUser)
       history.push('/')
     } catch(err){
       console.log(err)
