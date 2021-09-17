@@ -38,6 +38,7 @@ const App : React.FC = () => {
       <Router>
         <NavBar
           logOut={logOut}
+          user={user}
         />
         <Route exact path='/'>
           {isLoading?
