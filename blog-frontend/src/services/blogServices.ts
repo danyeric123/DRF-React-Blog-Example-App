@@ -1,6 +1,6 @@
 import { axiosInstance } from "./authServices"
 
-const BASE_URL = 'http://127.0.0.1:8000/api/posts'
+const BASE_URL = 'http://127.0.0.1:8000/api/posts/'
 
 export interface Post {
   id?: number;
@@ -10,7 +10,7 @@ export interface Post {
   content: string;
   status:string;
   published: string;
-  category: string[]
+  category?: string[]
 }
 
 export const getAllPosts = async () : Promise<Post[]> => {
@@ -19,9 +19,13 @@ export const getAllPosts = async () : Promise<Post[]> => {
 }
 
 export const createPost = async (newPost : Post) => {
-  axiosInstance.post('/posts', newPost)
+  axiosInstance.post('/posts/', newPost)
 }
 
 export const getPost = async (title : string) : Promise<Post>  => {
   return axiosInstance.get(`/posts/${title}`).then(res=>res.data)
+}
+
+export const removePost = async (title: string) =>{
+  axiosInstance.delete(`/posts/${title}`)
 }

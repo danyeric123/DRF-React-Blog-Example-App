@@ -8,11 +8,12 @@ interface Snippet {
   excerpt: string;
   status:string;
   published: string;
-  category: string[]
+  category?: string[];
+  deletePost: (title:string)=>void
 }
 
-const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,category}) => {
-  
+const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,category, deletePost}) => {
+
   return (
     <div
       className="post-card"
@@ -29,7 +30,15 @@ const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,ca
       <p>{excerpt}</p>
       <small>Categories: {category}</small>
       </Link>
-
+      <br/>
+      <Link
+        to={{
+          pathname: `posts/:title/edit`
+        }}
+      >
+        Edit
+      </Link>
+      <button onClick={()=>deletePost(title)}>Delete</button>
     </div>
   )
 }

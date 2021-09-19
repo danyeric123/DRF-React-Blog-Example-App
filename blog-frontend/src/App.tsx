@@ -4,7 +4,7 @@ import './App.css';
 import Login from './components/Login';
 import PostCard from './components/PostCard';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { getAllPosts, Post } from './services/blogServices';
+import { getAllPosts, Post, removePost } from './services/blogServices';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
@@ -34,6 +34,12 @@ const App : React.FC = () => {
 		localStorage.removeItem('refresh_token');
 		axiosInstance.defaults.headers['Authorization'] = null;
   }
+
+  const deletePost = (title: string)=>{
+    removePost(title)
+    const newPosts = posts?.filter(post=>post.title===title)
+    setPosts(newPosts)
+  }
   
   return (
     <>
@@ -54,6 +60,7 @@ const App : React.FC = () => {
                 status={post.status}
                 published={post.published}
                 category={post.category}
+                deletePost={deletePost}
               />
             ))
           } 
@@ -65,7 +72,7 @@ const App : React.FC = () => {
           <SignUp />
         </Route>
         <Route exact path="/create">
-          <PostForm />
+          <PostForm user={user} />
         </Route>
         <Route exact path="/posts/:title">
           <PostDetails />

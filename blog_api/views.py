@@ -1,4 +1,5 @@
 from .serializers import PostSerializer
+from django.contrib.auth.models import User
 from .models import Post
 from django.shortcuts import get_object_or_404, render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -24,3 +25,9 @@ class PostList(ModelViewSet):
   def get_object(self, queyset=None, **kwargs):
       item = self.kwargs.get('pk')
       return get_object_or_404(Post,title=item)
+  
+  def create(self, request, *args, **kwargs):
+    #   author = User.objects.get(username=request.data['author'])
+    #   request.data['author'] =author.id
+      print(request.data)
+      return super().create(request, *args, **kwargs)
