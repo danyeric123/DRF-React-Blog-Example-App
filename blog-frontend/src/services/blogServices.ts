@@ -1,7 +1,9 @@
+import { axiosInstance } from "./authServices"
+
 const BASE_URL = 'http://127.0.0.1:8000/api/posts'
 
 export interface Post {
-  id: number;
+  id?: number;
   title: string;
   author: string;
   excerpt: string;
@@ -14,4 +16,8 @@ export interface Post {
 export const getAllPosts = async () : Promise<Post[]> => {
   return fetch(BASE_URL)
                 .then(res=>res.json())
+}
+
+export const createPost = async (newPost : Post) => {
+  axiosInstance.post('/posts', newPost)
 }
