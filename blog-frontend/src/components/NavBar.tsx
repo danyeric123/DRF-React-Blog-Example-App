@@ -49,6 +49,11 @@ const NavBar : React.FC<NavProps> = ({logOut, user}) => {
         </Link>
       </li>
       <li>
+        <Link to="/create">
+          Create New Post
+        </Link>
+      </li>
+      <li>
         <div
           onClick={()=>{
             logOut()
