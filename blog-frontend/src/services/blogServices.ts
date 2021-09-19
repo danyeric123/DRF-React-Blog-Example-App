@@ -21,3 +21,7 @@ export const getAllPosts = async () : Promise<Post[]> => {
 export const createPost = async (newPost : Post) => {
   axiosInstance.post('/posts', newPost)
 }
+
+export const getPost = async (title : string) : Promise<Post>  => {
+  return axiosInstance.get(`/posts/${title}`).then(res=>res.data)
+}

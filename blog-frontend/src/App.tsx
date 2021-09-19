@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
 import PostForm from './components/PostForm';
+import PostDetails from './pages/PostDetails';
 // import {getUserFromToken } from './services/userService'
 
 const App : React.FC = () => {
@@ -65,6 +66,9 @@ const App : React.FC = () => {
         </Route>
         <Route exact path="/create">
           <PostForm />
+        </Route>
+        <Route exact path="/posts/:title">
+          <PostDetails />
         </Route>
       </Router>
     </>
