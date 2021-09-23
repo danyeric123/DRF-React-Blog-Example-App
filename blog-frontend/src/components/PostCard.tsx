@@ -2,7 +2,7 @@ import moment from 'moment'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-interface Snippet {
+interface PostCardProps {
   title: string;
   author: string;
   excerpt: string;
@@ -10,9 +10,10 @@ interface Snippet {
   published: string;
   category?: string[];
   deletePost: (title:string)=>void
+  user: string
 }
 
-const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,category, deletePost}) => {
+const PostCard : React.FC <PostCardProps> = ({title,author,excerpt,status,published,category, deletePost, user}) => {
 
   return (
     <div
@@ -31,6 +32,8 @@ const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,ca
       <small>Categories: {category}</small>
       </Link>
       <br/>
+      {author===user&&(
+      <>
       <Link
         to={{
           pathname: `posts/:title/edit`
@@ -39,6 +42,8 @@ const PostCard : React.FC <Snippet> = ({title,author,excerpt,status,published,ca
         Edit
       </Link>
       <button onClick={()=>deletePost(title)}>Delete</button>
+      </>)
+      }
     </div>
   )
 }

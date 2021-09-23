@@ -62,6 +62,7 @@ const App : React.FC = () => {
                 published={post.published}
                 category={post.category}
                 deletePost={deletePost}
+                user={user}
               />
             ))
           } 
