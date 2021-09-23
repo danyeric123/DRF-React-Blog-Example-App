@@ -9,6 +9,7 @@ export interface Post {
   excerpt: string;
   content: string;
   status:string;
+  slug?: string
   published: string;
   category?: string[]
 }
@@ -22,8 +23,8 @@ export const createPost = async (newPost : Post) => {
   axiosInstance.post('/posts/', newPost)
 }
 
-export const getPost = async (title : string) : Promise<Post>  => {
-  return axiosInstance.get(`/posts/${title}`).then(res=>res.data)
+export const getPost = async (slug : string) : Promise<Post>  => {
+  return axiosInstance.get(`/posts/${slug}`).then(res=>res.data)
 }
 
 export const removePost = async (title: string) =>{

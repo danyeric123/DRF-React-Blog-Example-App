@@ -8,7 +8,7 @@ interface PostCardProps extends Post {
   user: string
 }
 
-const PostCard : React.FC <PostCardProps> = ({title, content,username,excerpt,status,published,category, deletePost, user}) => {
+const PostCard : React.FC <PostCardProps> = ({title, slug,content,username,excerpt,status,published,category, deletePost, user}) => {
 
   return (
     <div
@@ -16,7 +16,7 @@ const PostCard : React.FC <PostCardProps> = ({title, content,username,excerpt,st
     >
       <Link
         to={{
-          pathname: `/posts/${title}`
+          pathname: `/posts/${slug}`
         }}
       >
       <h1>{title}</h1>
@@ -31,7 +31,7 @@ const PostCard : React.FC <PostCardProps> = ({title, content,username,excerpt,st
       <>
       <Link
         to={{
-          pathname: `posts/${title}/edit`,
+          pathname: `posts/${slug}/edit`,
           state: {title,status,published,content}
         }}
       >

@@ -4,20 +4,20 @@ import { getPost, Post } from '../services/blogServices'
 import moment from 'moment'
 
 type params = {
-  title: string
+  slug: string
 }
 
 const PostDetails = () => {
-  const {title} = useParams<params>()
+  const {slug} = useParams<params>()
   const [post, setPost] = useState<Post>()
 
   useEffect(()=>{
     const fetchPost = async ()=>{
-      const fetchedPost = await getPost(title)
+      const fetchedPost = await getPost(slug)
       setPost(fetchedPost)
     }
     fetchPost()
-  },[title])
+  },[slug])
   return (
     <>
       <h1>{post?.title}</h1>

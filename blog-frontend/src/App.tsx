@@ -65,6 +65,7 @@ const App : React.FC = () => {
                 title={post.title}
                 username={post.username}
                 content={post.content}
+                slug={post.slug}
                 excerpt={post.excerpt}
                 status={post.status}
                 published={post.published}
@@ -84,10 +85,10 @@ const App : React.FC = () => {
         <Route exact path="/create">
           <PostForm user={user} addPost={addPost} />
         </Route>
-        <Route exact path="/posts/:title">
+        <Route exact path="/posts/:slug">
           <PostDetails />
         </Route>
-        <Route exact path="/posts/:title/edit">
+        <Route exact path="/posts/:slug/edit">
           <EditPost />
         </Route>
       </Router>
