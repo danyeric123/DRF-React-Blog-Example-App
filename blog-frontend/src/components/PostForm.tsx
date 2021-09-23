@@ -24,7 +24,7 @@ const PostForm : FC<Props> = ({user}) => {
       title, 
       content,
       status,
-      author:user, 
+      username:user, 
       excerpt: content.split(' ').slice(0,3).join(' '),
       published,
       slug: slugiy(title),

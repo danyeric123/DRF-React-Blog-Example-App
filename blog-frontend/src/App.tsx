@@ -10,6 +10,7 @@ import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
 import PostForm from './components/PostForm';
 import PostDetails from './pages/PostDetails';
+import EditPost from './pages/EditPost';
 // import {getUserFromToken } from './services/userService'
 
 const App : React.FC = () => {
@@ -55,7 +56,7 @@ const App : React.FC = () => {
               <PostCard 
                 key={post.id}
                 title={post.title}
-                author={post.author}
+                author={post.username}
                 excerpt={post.excerpt}
                 status={post.status}
                 published={post.published}
@@ -77,6 +78,7 @@ const App : React.FC = () => {
         <Route exact path="/posts/:title">
           <PostDetails />
         </Route>
+        
       </Router>
     </>
   );

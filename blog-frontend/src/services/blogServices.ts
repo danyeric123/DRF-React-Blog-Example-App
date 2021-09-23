@@ -5,7 +5,7 @@ const BASE_URL = 'http://127.0.0.1:8000/api/posts/'
 export interface Post {
   id?: number;
   title: string;
-  author: string;
+  username: string;
   excerpt: string;
   content: string;
   status:string;

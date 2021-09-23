@@ -21,7 +21,7 @@ const PostDetails = () => {
   return (
     <>
       <h1>{post?.title}</h1>
-      <small>By {post?.author}</small>
+      <small>By {post?.username}</small>
       <p>{post?.content}</p>
       <small>Publication Date: {moment(post?.published).format('MMMM Do YYYY, h:mm:ss a')}</small>
       {post?.category&& <small>Categories: {post?.category.map(cat=>cat+",")}</small> }
