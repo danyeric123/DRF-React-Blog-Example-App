@@ -3,9 +3,15 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    username = serializers.SerializerMethodField("get_username")
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
     category = serializers.ReadOnlyField(source='category.name')
     
+    def get_username(self, obj):
+        return obj.author.username
+    
     class Meta:
-        fields = ('id', 'title', 'author', 'excerpt', 'content', 'slug', 'status','published','category')
+        fields = ('id', 'title', 'author', 'username', 'excerpt', 'content', 'slug', 'status','published','category')
         model = Post

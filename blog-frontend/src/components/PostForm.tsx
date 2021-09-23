@@ -1,6 +1,6 @@
 import { userInfo } from 'os'
 import React, { FC, useState } from 'react'
-import { createPost } from '../services/blogServices'
+import { createPost, Post } from '../services/blogServices'
 
 enum Status {
   DRAFT = 'draft',

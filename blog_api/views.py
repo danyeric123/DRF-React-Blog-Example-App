@@ -27,7 +27,7 @@ class PostList(ModelViewSet):
       return get_object_or_404(Post,title=item)
   
   def create(self, request, *args, **kwargs):
-    #   author = User.objects.get(username=request.data['author'])
-    #   request.data['author'] =author.id
+      # author = User.objects.get(username=request.user)
+      # request.data['author'] = request.user
       print(request.data)
       return super().create(request, *args, **kwargs)
