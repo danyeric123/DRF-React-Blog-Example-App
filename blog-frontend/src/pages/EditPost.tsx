@@ -1,7 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { useLocation } from 'react-router'
 import { Post } from '../services/blogServices'
 
-const EditPost : FC<Post> = ({title,content,status,published}) => {
+interface EditPostProps{
+  title: string;
+  content: string;
+  status:string;
+  published: string;
+}
+
+const EditPost : FC = () => {
+  
   return (
     <>
       

@@ -1,5 +1,6 @@
 import { userInfo } from 'os'
 import React, { FC, useState } from 'react'
+import { useHistory } from 'react-router'
 import { createPost, Post } from '../services/blogServices'
 
 enum Status {
@@ -8,15 +9,17 @@ enum Status {
 }
 
 interface Props {
-  user: string
+  user: string,
+  addPost: (post:Post)=>void
 }
 
-const PostForm : FC<Props> = ({user}) => {
+const PostForm : FC<Props> = ({user,addPost}) => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [status, setStatus] = useState(Status.DRAFT)
   const [published, setPublished] = useState('')
   const [category, setCategory] = useState<string[]>()
+  const history = useHistory()
   
   const handleSubmit = (e : React.FormEvent) => {
     e.preventDefault()
@@ -30,7 +33,8 @@ const PostForm : FC<Props> = ({user}) => {
       slug: slugiy(title),
       category
     }
-    createPost(post)
+    addPost(post)
+    history.push('/')
   }
 
   const slugiy = (string: string) : string =>{

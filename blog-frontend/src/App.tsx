@@ -4,17 +4,18 @@ import './App.css';
 import Login from './components/Login';
 import PostCard from './components/PostCard';
 import {BrowserRouter as Router} from 'react-router-dom'
-import { getAllPosts, Post, removePost } from './services/blogServices';
+import { createPost, getAllPosts, Post, removePost } from './services/blogServices';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import { axiosInstance } from './services/authServices';
 import PostForm from './components/PostForm';
 import PostDetails from './pages/PostDetails';
 import EditPost from './pages/EditPost';
+import { getUserFromToken } from './services/userService';
 // import {getUserFromToken } from './services/userService'
 
 const App : React.FC = () => {
-  const [posts,setPosts] = useState<Post[]>()
+  const [posts,setPosts] = useState<Post[]>([])
   const [isLoading,setIsLoading] = useState(true)
   const [user, setUser] = useState('')
 
@@ -23,6 +24,7 @@ const App : React.FC = () => {
       const newPosts = await getAllPosts()
       setPosts(newPosts)
       setIsLoading(false)
+      setUser(getUserFromToken())
     }
     getPosts()
   },[])
@@ -38,8 +40,13 @@ const App : React.FC = () => {
 
   const deletePost = (title: string)=>{
     removePost(title)
-    const newPosts = posts?.filter(post=>post.title===title)
+    const newPosts = posts?.filter(post=>post.title!==title)
     setPosts(newPosts)
+  }
+
+  const addPost = (post : Post) =>{
+    createPost(post)
+    setPosts([...posts,post])
   }
   
   return (
@@ -56,7 +63,8 @@ const App : React.FC = () => {
               <PostCard 
                 key={post.id}
                 title={post.title}
-                author={post.username}
+                username={post.username}
+                content={post.content}
                 excerpt={post.excerpt}
                 status={post.status}
                 published={post.published}
@@ -74,12 +82,14 @@ const App : React.FC = () => {
           <SignUp />
         </Route>
         <Route exact path="/create">
-          <PostForm user={user} />
+          <PostForm user={user} addPost={addPost} />
         </Route>
         <Route exact path="/posts/:title">
           <PostDetails />
         </Route>
-        
+        <Route exact path="/posts/:title/edit">
+          <EditPost />
+        </Route>
       </Router>
     </>
   );
