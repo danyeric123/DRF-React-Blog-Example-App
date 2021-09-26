@@ -9,6 +9,8 @@ from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly, 
 
 class PostUserWritePermission(BasePermission):
     message = 'Editing posts is restricted to the author only.'
+    
+    
 
     def has_object_permission(self, request, view, obj):
 
@@ -26,8 +28,6 @@ class PostList(ModelViewSet):
       item = self.kwargs.get('pk')
       return get_object_or_404(Post,slug=item)
   
-  def create(self, request, *args, **kwargs):
-      # author = User.objects.get(username=request.user)
-      # request.data['author'] = request.user
-      print(request.data)
-      return super().create(request, *args, **kwargs)
+#   def create(self, request, *args, **kwargs):
+#     print(request.data)
+#     return super().create(request, *args, **kwargs)
