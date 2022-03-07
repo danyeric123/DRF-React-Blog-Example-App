@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 class UserCreate(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request, format='json'):
+    def post(self, request, format="json"):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -22,6 +22,7 @@ class UserCreate(APIView):
 
 # class UserTokenObtainPairView(TokenObtainPairView):
 #     serializer_class = UserTokenObtainPairSerializer
+
 
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]

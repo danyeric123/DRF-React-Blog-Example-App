@@ -16,29 +16,27 @@ class Category(Model):
 
 
 class Post(Model):
-  class PostObjects(Manager):
-      def get_queryset(self):
-          return super().get_queryset() .filter(status='published')
+    class PostObjects(Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(status="published")
 
-  options = (
-      ('draft', 'Draft'),
-      ('published', 'Published'),
-  )
-  category = ManyToManyField(Category)
-  title = CharField(max_length=250)
-  excerpt = TextField(null=True)
-  content = TextField()
-  slug = SlugField(max_length=250, unique_for_date='published')
-  published = DateTimeField(default=timezone.now)
-  author = ForeignKey(
-      User, on_delete=CASCADE, related_name='blog_posts')
-  status = CharField(
-      max_length=10, choices=options, default='published')
-  objects = Manager()  # default manager
-  postobjects = PostObjects()  # custom manager
+    options = (
+        ("draft", "Draft"),
+        ("published", "Published"),
+    )
+    category = ManyToManyField(Category)
+    title = CharField(max_length=250)
+    excerpt = TextField(null=True)
+    content = TextField()
+    slug = SlugField(max_length=250, unique_for_date="published")
+    published = DateTimeField(default=timezone.now)
+    author = ForeignKey(User, on_delete=CASCADE, related_name="blog_posts")
+    status = CharField(max_length=10, choices=options, default="published")
+    objects = Manager()  # default manager
+    postobjects = PostObjects()  # custom manager
 
-  class Meta:
-      ordering = ('-published',)
+    class Meta:
+        ordering = ("-published",)
 
-  def __str__(self):
-      return self.title
+    def __str__(self):
+        return self.title
